@@ -1,0 +1,120 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+body{
+    width:414px;
+    height: 2000px;
+    background: linear-gradient(#FFFAFA,#FAEBD7,#FFE4E1,#E0FFFF,#FFFFE0,#E6E6FA);
+    overflow-x: hidden;
+    position: relative;
+}
+
+#snowflakes-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+#snowflakes-container img {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    user-select: none;
+    display: none;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.block1{
+    width:100%;
+    display:flex;  
+    margin-top:100px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:17px;
+}
+
+.letters{
+    opacity: 0;
+    animation: letters 10s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; 
+    box-shadow: 0 0 100px #0ff, inset 0 0 100px #0ff;
+}
+
+@keyframes letters {
+    0% {
+        opacity: 0;
+        transform: scale(-1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }  
+}
+
+.lena_1{
+    height: 100px;
+    width: 100px;
+    border-radius:50%;
+    opacity: 0;
+    transform: scale(0,1) rotate(45deg);
+    animation: simpleAppear 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; 
+    box-shadow: 0 0 100px #0ff, inset 0 0 100px #0ff;
+}
+
+@keyframes simpleAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.1) rotate(0deg);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(5) rotate(10000deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(1deg);
+    }  
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#startButton {
+    padding: 12px 24px;
+    background: #00FFFF;
+    color: black;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+#startButton:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+#startButton:active {
+    transform: translateY(0);
+}
+
+#startButton.active {
+    background: #4CAF50;
+}
