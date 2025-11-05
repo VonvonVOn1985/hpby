@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Гойда!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        #goidaButton {
+            padding: 30px 60px;
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff0000, #ff6b00);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+            transition: all 0.3s;
+            z-index: 10000;
+            position: relative;
+        }
+
+        #goidaButton:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.7);
+        }
+
+        #goidaButton:active {
+            transform: scale(0.95);
+        }
+
+        #prankVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 200px;
+            object-fit: cover;
+            z-index: 9999;
+            display: none;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Кнопка -->
+    <button id="goidaButton">Дать гойду</button>
+
+    <!-- Видео -->
+    <video id="prankVideo" playsinline webkit-playsinline muted loop>
+        <source src="video/goida.mp4" type="video/mp4" preload="/video/bondar.jpg">
+    </video>
+
+    <script>
+        const goidaButton = document.getElementById('goidaButton');
+        const prankVideo = document.getElementById('prankVideo');
+
+        function startGoyda() {
+            // Скрываем кнопку
+            goidaButton.style.display = 'none';
+            
+            // Показываем видео
+            prankVideo.style.display = 'block';
+            
+            // Устанавливаем максимальную громкость
+            prankVideo.volume = 1.0;
+            prankVideo.muted = false;
+            
+            // Запускаем видео
+            prankVideo.play().then(() => {
+                // Пытаемся войти в полноэкранный режим
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen();
+                }
+                
+                // Постоянно поддерживаем максимальную громкость
+                setInterval(() => {
+                    prankVideo.volume = 1.0;
+                    prankVideo.muted = false;
+                }, 100);
+                
+            }).catch(error => {
+                // Если не получилось, показываем кнопку снова
+                alert('Не удалось запустить видео. Нажмите еще раз.');
+                goidaButton.style.display = 'block';
+            });
+        }
+
+        // Вешаем обработчик на кнопку
+        goidaButton.addEventListener('click', startGoyda);
+
+        // Предзагрузка видео при загрузке страницы
+        window.addEventListener('load', function() {
+            prankVideo.load();
+        });
+    </script>
+</body>
+</html>
